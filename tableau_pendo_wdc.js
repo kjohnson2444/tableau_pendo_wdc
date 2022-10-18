@@ -3,24 +3,25 @@
 
     myConnector.getSchema = function (schemaCallback) {
         var cols = [{
-            id: "id",
+            id: "name",
+            alias: "Guide Name",
             dataType: tableau.dataTypeEnum.string
         }, {
-            id: "mag",
-            alias: "magnitude",
-            dataType: tableau.dataTypeEnum.float
-        }, {
-            id: "title",
-            alias: "title",
+            id: "guide_id",
+            alias: "Guide ID",
             dataType: tableau.dataTypeEnum.string
         }, {
-            id: "location",
-            dataType: tableau.dataTypeEnum.geometry
+            id: "username",
+            alias: "username",
+            dataType: tableau.dataTypeEnum.string
+        }, {
+            id: "state",
+            dataType: tableau.dataTypeEnum.string
         }];
 
         var tableSchema = {
-            id: "earthquakeFeed",
-            alias: "Earthquakes with magnitude greater than 4.5 in the last seven days",
+            id: "PendoGuideFeed",
+            alias: "List of Pendo Guides",
             columns: cols
         };
 
@@ -28,17 +29,17 @@
     };
 
     myConnector.getData = function(table, doneCallback) {
-        $.getJSON("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson", function(resp) {
+        $.getJSON("https://app.pendo.io/api/v1/guide?content-type&=application/json&x-pendo-integration-key=84e57b87-0c59-486f-6289-2a517d39b078.us", function(resp) {
             var feat = resp.features,
                 tableData = [];
 
             // Iterate over the JSON object
             for (var i = 0, len = feat.length; i < len; i++) {
                 tableData.push({
-                    "id": feat[i].id,
-                    "mag": feat[i].properties.mag,
-                    "title": feat[i].properties.title,
-                    "location": feat[i].geometry
+                    "name": feat[i].name,
+                    "guide_id": feat[i].id,
+                    "username": feat[i].createdByUser.username,
+                    "state": feat[i].state
                 });
             }
 
@@ -51,7 +52,7 @@
 })();
 $(document).ready(function () {
     $("#submitButton").click(function () {
-        tableau.connectionName = "USGS Earthquake Feed";
+        tableau.connectionName = "Pendo Guide List Feed";
         tableau.submit();
     });
 });
