@@ -6,17 +6,17 @@
             id: "name",
             alias: "Guide Name",
             dataType: tableau.dataTypeEnum.string
-        }, {
-            id: "guide_id",
-            alias: "Guide ID",
-            dataType: tableau.dataTypeEnum.string
-        }, {
-            id: "username",
-            alias: "username",
-            dataType: tableau.dataTypeEnum.string
-        }, {
-            id: "state",
-            dataType: tableau.dataTypeEnum.string
+        // }, {
+        //     id: "guide_id",
+        //     alias: "Guide ID",
+        //     dataType: tableau.dataTypeEnum.string
+        // }, {
+        //     id: "username",
+        //     alias: "username",
+        //     dataType: tableau.dataTypeEnum.string
+        // }, {
+        //     id: "state",
+        //     dataType: tableau.dataTypeEnum.string
         }];
 
         var tableSchema = {
@@ -37,9 +37,9 @@
             for (var i = 0, len = feat.length; i < len; i++) {
                 tableData.push({
                     "name": feat[i].name,
-                    "guide_id": feat[i].id,
-                    "username": feat[i].createdByUser.username,
-                    "state": feat[i].state
+                    // "guide_id": feat[i].id,
+                    // "username": feat[i].createdByUser.username,
+                    // "state": feat[i].state
                 });
             }
 
