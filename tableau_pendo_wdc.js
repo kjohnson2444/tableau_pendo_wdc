@@ -29,7 +29,7 @@
     };
 
     myConnector.getData = function(table, doneCallback) {
-        $.getJSON("https://app.pendo.io/api/v1/guide?content-type&=application/json&x-pendo-integration-key=84e57b87-0c59-486f-6289-2a517d39b078.us", function(resp) {
+        $.getJSON("https://app.pendo.io/api/v1/guide?content-type&=application/json&x-pendo-integration-key=84e57b87-0c59-486f-6289-2a517d39b078.us&callback=?", function(resp) {
             var feat = resp.features,
                 tableData = [];
 
